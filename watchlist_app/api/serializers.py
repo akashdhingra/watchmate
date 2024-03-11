@@ -1,37 +1,38 @@
 from rest_framework import serializers
 
-from watchlist_app.models import Movie
+from watchlist_app.models import StreamPlatform, WatchList
 
-class MovieSerializer(serializers.ModelSerializer):
-    
-    # custom method, that is not present in models
-    len_name = serializers.SerializerMethodField()
+class StreamPlatformSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Movie
+        model = StreamPlatform
         fields = "__all__"
-        # fields = ['name','description']
-        # exclude = ['active']
-        
-        
-    # use object (or any other variable name you choose) to refer to the 
-    # instance of the object being serialized within serializer methods. 
-    # Use self to refer to the serializer instance itself.
-    def get_len_name(self, object):
-        return len(object.name)
-        
-        
-    # Validation on object [Object Validation]
-    def validate(self, data):
-        if data['name'] == data['description']:
-            raise serializers.ValidationError("Name and Description should be different")
-        return data
+
+class WatchListSerializer(serializers.ModelSerializer):
     
-    # Validation on the field [Field validation]
-    def validate_name(self, value):
-        if len(value) < 2:
-            raise serializers.ValidationError("Name is too short!!")
-        return value
+    class Meta:
+        model = WatchList
+        fields = "__all__"
+        
+        
+    # # use object (or any other variable name you choose) to refer to the 
+    # # instance of the object being serialized within serializer methods. 
+    # # Use self to refer to the serializer instance itself.
+    # def get_len_name(self, object):
+    #     return len(object.name)
+        
+        
+    # # Validation on object [Object Validation]
+    # def validate(self, data):
+    #     if data['name'] == data['description']:
+    #         raise serializers.ValidationError("Name and Description should be different")
+    #     return data
+    
+    # # Validation on the field [Field validation]
+    # def validate_name(self, value):
+    #     if len(value) < 2:
+    #         raise serializers.ValidationError("Name is too short!!")
+    #     return value
 
 # def name_length(value):
 #     if len(value) < 2:
