@@ -4,11 +4,22 @@ from watchlist_app.models import Movie
 
 class MovieSerializer(serializers.ModelSerializer):
     
+    # custom method, that is not present in models
+    len_name = serializers.SerializerMethodField()
+    
     class Meta:
         model = Movie
         fields = "__all__"
         # fields = ['name','description']
         # exclude = ['active']
+        
+        
+    # use object (or any other variable name you choose) to refer to the 
+    # instance of the object being serialized within serializer methods. 
+    # Use self to refer to the serializer instance itself.
+    def get_len_name(self, object):
+        return len(object.name)
+        
         
     # Validation on object [Object Validation]
     def validate(self, data):
