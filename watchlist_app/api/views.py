@@ -1,6 +1,6 @@
 from rest_framework.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
-from watchlist_app.api.pagination import WatchListOPagination, WatchListPagination
+from watchlist_app.api.pagination import WatchListCPagination, WatchListOPagination, WatchListPagination
 from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
 from watchlist_app.api.serializers import ReviewSerializer, WatchListSerializer, StreamPlatformSerializer
 from watchlist_app.api.throttling import ReviewCreateThrottle, ReviewListThrottle
@@ -170,13 +170,14 @@ class StreamPlatformDetailAV(APIView):
 class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    pagination_class = WatchListOPagination
+    pagination_class = WatchListCPagination
     
     # permission_classes = [IsAuthenticated]
     # filter_backends = [DjangoFilterBackend]
     # filter_backends = [filters.SearchFilter]
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['avg_rating']
+    
+    # filter_backends = [filters.OrderingFilter]
+    # ordering_fields = ['avg_rating']
  
         
 class WatchListAV(APIView):
