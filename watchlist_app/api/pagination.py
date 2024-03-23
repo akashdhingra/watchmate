@@ -8,12 +8,12 @@ class WatchListPagination(PageNumberPagination):
     last_page_strings = ('end',)
     
 class WatchListOPagination(LimitOffsetPagination):
-    default_limit = 5
+    # default_limit = 1
     max_limit = 10
     limit_query_param = 'limit'
     offset_query_param = 'start'
     
 class WatchListCPagination(CursorPagination):
-    page_size = 5
+    # page_size = 10
     ordering = 'created'
     cursor_query_param = 'record'

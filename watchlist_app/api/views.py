@@ -175,7 +175,6 @@ class WatchListGV(generics.ListAPIView):
     # permission_classes = [IsAuthenticated]
     # filter_backends = [DjangoFilterBackend]
     # filter_backends = [filters.SearchFilter]
-    
     # filter_backends = [filters.OrderingFilter]
     # ordering_fields = ['avg_rating']
  
